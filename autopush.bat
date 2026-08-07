@@ -7,5 +7,5 @@ Git diff --cached --quiet
 if errorlevel 1 (
 git commit -m "copia automatica %date% %time%"
 git push  )
-echo "feta copia : "  %date% %time% >> C:\Users\Neus-Josep\Desktop\react\autopush.log
+echo "feta copia : "  %date% %time% >> C:\Users\Neus-Josep\Desktop\react\culdesac\autopush.log
 
