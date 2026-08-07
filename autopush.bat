@@ -7,5 +7,5 @@ Git diff --cached --quiet
 if errorlevel 1 (
 git commit -m "copia automatica %date% %time%"
 git push  )
-
+echo fer proces  : %date% %time% >> C:\Users\Neus-Josep\Desktop\react\autopush.log
 
