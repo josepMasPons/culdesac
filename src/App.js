@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-           <code>Cul de sac</code> Notes, esdeveniments i mes o menys
+           <code>Cul de sac 7</code> Notes, esdeveniments i mes o menys
         </p>
        </header>
     </div>
