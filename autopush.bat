@@ -4,35 +4,34 @@ setlocal
 cd /d C:\Users\Neus-Josep\Desktop\react\culdesac
 
 git add .
-git commit -m "Copia automatica"
-git push
+
+REM Comprovar si hi ha canvis preparats per fer commit
+git diff --cached --quiet
 
 if %errorlevel% equ 0 (
-    powershell 
-    -ExecutionPolicy Bypass
-    -Command "$wsh = 
-    New-Object -ComObject
-    WScript.Shell;
-    $wsh.Popup('ERROR en la Copia a GitHub ',5,'GitHub - Autopush',16) | Out-Null"
+    echo No hi ha canvis. No es fa cap copia.
 ) else (
-       powershell 
-    -ExecutionPolicy Bypass
-    -Command "$wsh = 
-    New-Object -ComObject
-    WScript.Shell;
-    $wsh.Popup('Copia a GitHub completada correctament',3,'GitHub - Autopush',64) | Out-Null"
+    REM Hi ha canvis: fer commit
+    git commit -m "Copia automatica %date% %time%"
+
+    if errorlevel 1 (
+        echo ERROR: no s'ha pogut fer el commit.
+        
+        powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$wsh = New-Object -ComObject WScript.Shell; $wsh.Popup('ERROR en la copia a GitHub',5,'GitHub - Autopush',16) | Out-Null"
+    ) else (
+        REM Fer push
+        git push
+
+        if errorlevel 1 (
+            echo ERROR: el git push ha fallat.
+
+            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$wsh = New-Object -ComObject WScript.Shell; $wsh.Popup('ERROR en la copia a GitHub',5,'GitHub - Autopush',16) | Out-Null"
+        ) else (
+            echo COPIA CORRECTA: git push completat.
+
+            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$wsh = New-Object -ComObject WScript.Shell; $wsh.Popup('Copia a GitHub completada correctament',3,'GitHub - Autopush',64) | Out-Null"
+        )
+    )
 )
+
 endlocal
-
-rem git diff --cached --quiet
-rem if errorlevel 1 (
-  rem ---  git commit -m "copia automatica %date% %time%"
-  rem ---  echo feta una copia el %date% a les %time% >> C:\Users\Neus-Josep\Desktop\react\culdesac\autopush.log
-  rem ---  git push
-
-rem --- msg %username% /TIME:5 "Còpia automàtica feta correctament"
-rem )
-remelse (
-rem     echo Llançat autopush.bat, però no feta cap còpia el %date% a les %time% >> C:\Users\Neus-Josep\Desktop\react\culdesac\autopush.log
-   rem --- msg %username% /TIME:5 "Llançat autopush.bat, però no feta Còpia automàtica "
-rem )
