@@ -1,6 +1,6 @@
 @echo off
 setlocal
-   echo "inici autopush "  %date% %time% >> C:\Users\Neus-Josep\Desktop\react\autopushculdesac.log
+ REM   echo "inici autopush "  %date% %time% >> C:\Users\Neus-Josep\Desktop\react\autopushculdesac.log
 cd /d C:\Users\Neus-Josep\Desktop\react\culdesac
 
 git add .
